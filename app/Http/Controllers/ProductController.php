@@ -50,7 +50,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+          return inertia('Product/Show', [
+            'product' => ProductResource::make($product)
+        ]);
     }
 
     /**
