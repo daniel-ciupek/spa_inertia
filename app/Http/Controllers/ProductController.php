@@ -19,7 +19,6 @@ class ProductController extends Controller
     {
         $products = auth()->user()
             ->products()
-            ->latest()
             ->with('category')
             ->where(function ($query) {
                 if ($search = request()->search) {
@@ -28,6 +27,15 @@ class ProductController extends Controller
                             $query->where('name', 'like', '%' . $search . '%');
                         });
                 }
+            })
+               ->when(!request()->query('sort_by'), function ($query) {
+                $query->latest();
+            })
+            ->when(in_array(ltrim(request()->query('sort_by'), '-'), ['name', 'price', 'weight']), function ($query) {
+                $sortBy = request()->query('sort_by');
+                $field = ltrim($sortBy, '-');
+                $direction = substr($sortBy, 0, 1) === '-' ? 'desc' : 'asc';
+                $query->orderBy($field, $direction);
             })
             ->paginate(10)
             ->withQueryString();
