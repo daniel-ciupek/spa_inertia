@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProductController;
+Route::delete('/products/{ids}/bulk', [ProductController::class, 'bulkDestroy'])->name('products.bulk-destroy');
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
