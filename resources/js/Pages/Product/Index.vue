@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed} from "vue";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import Sortable from '@/Components/Sortable.vue';
@@ -33,6 +33,13 @@ const props = defineProps({
         type: Object,
         required: true
     },
+
+     categories: {
+        type: Array,
+        required: true
+    },
+
+
      query: {
         type: Object,
         default: () => ({
@@ -41,6 +48,11 @@ const props = defineProps({
     }
 })
 
+const selectedProducts = computed(() => {
+    return props.products.data
+        .filter((product) => selectedIds.value.includes(product.id))
+        .map((product) => ({ id: product.id, name: product.name }))
+})
 
 const handleSearch = (event) => {
     router.get(route('products.index'), {
@@ -146,6 +158,9 @@ const handleSearch = (event) => {
                 </div>
             </div>
         </div>
-        <BulkEdit :show="showModal" @close="showModal = false" />
+        <BulkEdit :show="showModal" 
+            @close="showModal = false" 
+            :products="selectedProducts" 
+            :categories="categories" />
     </AuthenticatedLayout>
 </template>
