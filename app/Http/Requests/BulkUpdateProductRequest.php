@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
+
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
+class BulkUpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,8 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-             'name' => ['required', 'string', 'min:10'],
-            'brand' => ['required', 'string', 'min:5'],
             'category_id' => ['required', 'exists:categories,id'],
-            'price' => ['required', 'numeric'],
-            'weight' => ['required', 'numeric'],
-            'description' => ['required', 'string']
+            'product_ids' => ['required', 'array']
         ];
     }
 
@@ -38,4 +34,5 @@ class StoreProductRequest extends FormRequest
             'category_id' => 'Category'
         ];
     }
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProductController;
 Route::delete('/products/{ids}/bulk', [ProductController::class, 'bulkDestroy'])->name('products.bulk-destroy');
+Route::patch('/products/bulk/update', [ProductController::class, 'bulkUpdate'])->name('products.bulk-update');
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {

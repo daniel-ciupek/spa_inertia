@@ -160,6 +160,7 @@ const handleSearch = (event) => {
         </div>
         <BulkEdit :show="showModal" 
             @close="showModal = false" 
+            @updated="selectedIds = []"
             :products="selectedProducts" 
             :categories="categories" />
     </AuthenticatedLayout>
