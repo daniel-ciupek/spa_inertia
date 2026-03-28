@@ -2,16 +2,12 @@ services:
 
   # ── PHP-FPM (Laravel backend) ─────────────────────────────
   app:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-      args:
-        UID: 1000
-        GID: 1000
+    image: 'danielciupek/spa_inertia:v1.3'
     container_name: spa_app
-    restart: unless-stopped
     volumes:
       - .:/var/www/html
+      - ./docker/php/entrypoint.sh:/entrypoint.sh
+    entrypoint: ["/bin/sh", "/entrypoint.sh"]
     networks:
       - spa_network
     depends_on:

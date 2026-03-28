@@ -1,0 +1,52 @@
+
+# Zależności (instalowane w obrazie)
+node_modules
+vendor
+
+# Dane budowania frontendu
+public/build
+public/hot
+
+# Logi
+*.log
+storage/logs/*
+
+# Dane bazy / cache lokalny
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# Środowisko
+.env
+.env.*
+
+# Edytory i IDE
+.idea
+.vscode
+.zed
+.nova
+.fleet
+*.phpstorm.meta.php
+_ide_helper.php
+_ide_helper_models.php
+
+# Git
+.git
+.gitignore
+
+# Docker (nie pakuj configów dockera do obrazu)
+docker-compose.yml
+docker-compose.*.yml
+Dockerfile
+
+# Testy
+tests
+phpunit.xml
+
+# System
+.DS_Store
+Thumbs.db
+
+# NPM
+package-lock.json
+npm-debug.log
